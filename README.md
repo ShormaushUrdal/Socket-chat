@@ -25,8 +25,13 @@ This project is a modular, multi-client chat server written in C, designed for l
 - [Optional] Doxygen for documentation
 
 ### Compilation
+
+- You need to create binary of client and server files.
 ```sh
-gcc main.c discovery.c chat.c network_utils.c auth.c -o chat_server
+gcc server.c -o chat_server 
+```
+```sh
+gcc client.c -o client
 ```
 
 ### Running the Server
@@ -36,6 +41,10 @@ gcc main.c discovery.c chat.c network_utils.c auth.c -o chat_server
 - The server listens on **TCP port 8888** for chat clients.
 - It broadcasts its presence on **UDP port 8889** for discovery.
 
+### Running the Client
+```sh
+./client
+```
 ---
 
 ## How It Works
