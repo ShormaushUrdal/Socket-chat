@@ -45,8 +45,8 @@ void get_client_address(int sockfd, char *addr_buf) {
 // Setup TCP server socket
 int setup_tcp_server(struct sockaddr_in *address) {
     int opt = 1;
-    int master_socket;
-    if ((master_socket = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
+    int master_socket = socket(AF_INET, SOCK_STREAM, 0);
+    if (master_socket == 0) {
         perror("TCP socket failed");
         exit(EXIT_FAILURE);
     }
@@ -72,8 +72,8 @@ int setup_tcp_server(struct sockaddr_in *address) {
 // Setup UDP discovery socket
 int setup_udp_discovery(struct sockaddr_in *broadcast_addr) {
     int opt = 1;
-    int discovery_socket;
-    if ((discovery_socket = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
+    int discovery_socket = socket(AF_INET, SOCK_DGRAM, 0);
+    if (discovery_socket < 0) {
         perror("UDP socket failed");
         exit(EXIT_FAILURE);
     }
@@ -195,7 +195,6 @@ void server_loop(int master_socket, int discovery_socket, struct sockaddr_in *ad
             int sd = client_socket[i];
             if (sd > 0 && FD_ISSET(sd, &readfds)) {
                 handle_client_messages(client_socket, &num_clients);
-                break; // Only handle one client per select loop
             }
         }
         if (activity == 0) {
